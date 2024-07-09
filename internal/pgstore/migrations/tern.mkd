@@ -1,0 +1,32 @@
+# Comandos
+
+Para iniciar
+
+- tern init (caminho onde ficarão as migrations)
+
+```
+tern init ./init/pgstore/migrations
+```
+
+Para criar uma migration
+
+- tern new --migrations .\internal\pgstore\migrations (nome da migration)
+
+```
+tern new --migrations .\internal\pgstore\migrations create_trips_table
+```
+
+Para rodar as migrations
+
+- tern migrate --migrations (Local onde estão as migrations) --config (Local onde esta o arquivo de configuração do tern)
+
+```
+tern migrate --migrations .\internal\pgstore\migrations --config .\internal\pgstore\migrations\tern.conf
+```
+
+Se costuma adiciona um diretiva no gen.go
+
+```
+//go:generate tern migrate --migrations ./internal/pgstore/migrations/ --config ./internal/pgstore/migrations/tern.conf
+´´´
+```
