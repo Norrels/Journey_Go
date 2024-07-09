@@ -1,0 +1,28 @@
+# Comandos
+
+1. Instale o `sqlc`
+
+```
+go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+```
+
+2. Escreva as queries
+
+```sql
+// :one significa que deve retorna 1
+// :many varios
+// :exec nada
+// :copyFrom essa diretiva é do pgx que faça com que seja possivel inserir varios row no banco (batch insert)
+
+-- name: InsertTrip :one
+INSERT INTO trips
+    ("destination", "owner_name", "owner_email", "starts_at", "ends_at") VALUES
+    ($1, $2, $3, $4, $5)
+RETURNING "id"
+```
+
+3. Gere as queries
+
+```
+sqlc generate -f .\internal\pgstore\sqlc.yaml
+```
