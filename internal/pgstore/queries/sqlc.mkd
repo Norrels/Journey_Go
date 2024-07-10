@@ -7,13 +7,12 @@ go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
 ```
 
 2. Escreva as queries
+- :one significa que deve retorna 1
+- :many varios
+- :exec nada
+- :copyFrom essa diretiva é do pgx que faça com que seja possivel inserir varios row no banco (batch insert)
 
 ```sql
-// :one significa que deve retorna 1
-// :many varios
-// :exec nada
-// :copyFrom essa diretiva é do pgx que faça com que seja possivel inserir varios row no banco (batch insert)
-
 -- name: InsertTrip :one
 INSERT INTO trips
     ("destination", "owner_name", "owner_email", "starts_at", "ends_at") VALUES
@@ -25,4 +24,9 @@ RETURNING "id"
 
 ```
 sqlc generate -f .\internal\pgstore\sqlc.yaml
+```
+
+Se costuma adiciona uma diretiva no gen.go
+```
+//go:generate sqlc generate -f .\internal\pgstore\sqlc.yaml
 ```
